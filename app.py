@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return redirect('https://stellajkimm.github.io')
+    return redirect('https://github.com/stellajkimm/spotify-now-playing')
 
 @app.route('/track', methods=['post'])
 def track():
