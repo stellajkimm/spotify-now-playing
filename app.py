@@ -50,7 +50,7 @@ def track():
 def login():
     username = request.values.get('text')
     scope = 'user-read-playback-state'
-    util.prompt_for_user_token(username, scope)
+    prompt_for_user_token(username, scope)
 
     response_text = "Successfully logged in as {}".format(username) if True else "Something went wrong with logging in."
     data = jsonify({
