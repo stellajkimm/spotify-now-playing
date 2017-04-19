@@ -104,7 +104,7 @@ def prompt_for_user_token(username, scope=None, client_id = None,
         ''')
         auth_url = sp_oauth.get_authorize_url()
         try:
-            webbrowser(auth_url)
+            webbrowser.open(auth_url)
             print("Opened %s in your browser" % auth_url)
         except:
             print("Please navigate here: %s" % auth_url)
