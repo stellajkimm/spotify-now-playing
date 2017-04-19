@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import os, json, spotipy
+import os, json, spotipy, webbrowser
 import spotipy.util as util
 from spotipy import oauth2
 from flask import Flask, request, Response, redirect, jsonify
