@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import os, spotipy
+import os, json, spotipy
 from flask import Flask, request, Response, redirect
 
 app = Flask(__name__)
@@ -25,8 +25,12 @@ def track():
     else:
         result = 'No results for "%s"' % text
 
+    data = json.dumps({
+        'response_type': 'in_channel',
+        'text': result,
+    })
 
-    return Response(result,
+    return Response(data,
                     content_type='text/plain; charset=utf-8')
 
 if __name__ == "__main__":
