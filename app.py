@@ -17,13 +17,23 @@ def track():
     '''
     text = request.values.get('text')
 
-    spotify = spotipy.Spotify()
-    results = spotify.search(q='artist:' + text, type='artist', limit=1)
-
-    if len(results['artists']['items']) > 0:
-        result = results['artists']['items'][0]['external_urls']['spotify']
+    query_types = ['artist', 'track', 'playlist', 'album']
+    if text.split(' ', 1)[0] in query_types and len(text.split(' ', 1)) > 1:
+        query_type = text.split(' ', 1)[0]
+        query = '{0}:{1}'.format(query_type, text.split(' ', 1)[1])
     else:
-        result = 'No results for "%s"' % text
+        query_type = 'track'
+        query = '{0}:{1}'.format(query_type, text)
+
+    spotify = spotipy.Spotify()
+    results = spotify.search(q=query, type=query_type, limit=1)
+    print results
+    items = results['{}s'.format(query_type)]['items']
+
+    if len(items) > 0:
+        result = items[0]['external_urls']['spotify']
+    else:
+        result = 'No results for "{}"'.format(text)
 
     data = jsonify({
         'response_type': 'in_channel',
